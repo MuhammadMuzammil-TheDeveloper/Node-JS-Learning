@@ -41,3 +41,9 @@ import fs, { read } from "fs";
 //         }
 //     })
 // })()
+
+
+// writeFile= create
+// readFile = read
+// appendFile = update
+// unlink = delete 
