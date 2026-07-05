@@ -43,7 +43,18 @@ import fs, { read } from "fs";
 // })()
 
 
-// writeFile= create
-// readFile = read
-// appendFile = update
-// unlink = delete 
+// // writeFile= create
+// // readFile = read
+// // appendFile = update
+// // unlink = delete 
+
+
+const creatFolder =( () => {
+    fs.mkdir("./Cheking/check100/heelo.txt", (err, success)=>{
+        if(err){
+            console.log(err)
+        }else{
+            console.log(success)
+        }
+    })
+})()
