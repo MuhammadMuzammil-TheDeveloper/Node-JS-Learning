@@ -62,8 +62,6 @@
 
 console.log("Its working....")
 
-
-
 const {add, sub} = require("./math")
 console.log("Math value is ",sub(10, 80))
 console.log("Math value is ",add(10, 80))
