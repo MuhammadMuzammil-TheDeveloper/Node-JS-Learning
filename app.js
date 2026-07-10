@@ -10,7 +10,6 @@
 // }
 // createFile()
 
-
 // const readFile = (() => {
 //     fs.readFile("./name.txt", "utf-8", (err, success)=>{
 //         if(err){
@@ -42,12 +41,10 @@
 //     })
 // })()
 
-
 // // writeFile= create
 // // readFile = read
 // // appendFile = update
-// // unlink = delete 
-
+// // unlink = delete
 
 // const creatFolder =( () => {
 //     fs.mkdir("./Cheking/check100/heelo.txt", (err, success)=>{
@@ -59,9 +56,31 @@
 //     })
 // })()
 
+// console.log("Its working....")
 
-console.log("Its working....")
+// const {add, sub} = require("./math")
+// console.log("Math value is ",sub(10, 80))
+// console.log("Math value is ",add(10, 80))
 
-const {add, sub} = require("./math")
-console.log("Math value is ",sub(10, 80))
-console.log("Math value is ",add(10, 80))
+// creating server
+// const http = require('http')
+
+// http.createServer((req, res)=>{
+//  res.end("Heelo wordl")
+// }).listen(8080)
+
+const http = require("http");
+const port = 8080;
+
+http
+  .createServer((req, res) => {
+    console.log("req", req.url);
+    if (req.url === "/") {
+      res.end("You are in the Home Page");
+    } else if (req.url === "/about") {
+      res.end("Its about page");
+    } else if (req.url === "/contact") {
+      res.end("Contact....");
+    }
+  })
+  .listen(port);
