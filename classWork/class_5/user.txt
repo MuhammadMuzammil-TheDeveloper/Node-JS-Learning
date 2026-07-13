@@ -1,0 +1,1 @@
+[{"name":"Muzammil","age":20,"emai":"muzammil@gmail.com","password":"12345678"}]
