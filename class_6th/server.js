@@ -1,12 +1,21 @@
 import express from "express"
 import mongoose from "mongoose"
 import fs, { readFileSync } from "fs"
-
+import { setServers } from "dns";
+import StdModel from "./models/studentSchema.js";
+setServers(['8.8.8.8', '1.1.1.1'])
 
 // const URI = "mongodb+srv://admin:<db_password>@cluster0.fvidglr.mongodb.net/";
 const URI = "mongodb+srv://admin:admin@cluster0.fvidglr.mongodb.net/NotesDB?retryWrites=true&w=majority";
 mongoose.connect(URI)
 
+mongoose.connect(URI)
+.then(()=>{
+    console.log("MongoDB Connected");
+})
+.catch((err)=>{
+    console.log(err);
+});
 
 const app = express()
 app.use(express.json())
@@ -56,21 +65,31 @@ app.post("/login", (req, res)=>{
     }
 })
 
-app.put('/edit-user', (req,res)=>{
-    const user = req.body
-    const userData = JSON.parse(fs.readFileSync("users.txt", "utf-8"))
-    const isUserExist = userData.findIndex(obj => obj.email === user.email)
-    if(isUserExist === -1){
-        return res.end("User not exist")
-    }
-    const updateObj ={
-        ...userData[isUserExist],
-        ...user
-    }
-    userData.splice(isUserExist,1,updateObj)
-    fs.writeFileSync('users.txt', JSON.stringify(userData))
-    res.send("User updated succesfuuly")
+// app.put('/edit-user', (req,res)=>{
+//     const user = req.body
+//     const userData = JSON.parse(fs.readFileSync("users.txt", "utf-8"))
+//     const isUserExist = userData.findIndex(obj => obj.email === user.email)
+//     if(isUserExist === -1){
+//         return res.end("User not exist")
+//     }
+//     const updateObj ={
+//         ...userData[isUserExist],
+//         ...user
+//     }
+//     userData.splice(isUserExist,1,updateObj)
+//     fs.writeFileSync('users.txt', JSON.stringify(userData))
+//     res.send("User updated succesfuuly")
    
+// })
+
+app.post('/create-user', async (req,res)=>{
+   await StdModel.create(req.body)
+    res.send("created sucessfully")
 })
+
+app.put("/edit-user", (req, res)=>{
+
+})
+
 
 app.listen("5000", ()=> console.log("Server Is running on 5000"))
